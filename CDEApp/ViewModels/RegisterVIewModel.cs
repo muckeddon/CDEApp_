@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CDEApp.Models.ViewModels
+namespace CDEApp.ViewModels
 {
     public class RegisterViewModel
     {

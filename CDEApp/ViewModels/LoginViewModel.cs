@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CDEApp.Models.ViewModels
+namespace CDEApp.ViewModels
 {
     public class LoginViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace CDEApp.Models.ViewModels
+namespace CDEApp.ViewModels
 {
     public class AddDocumentViewModel
     {

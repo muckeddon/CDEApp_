@@ -1,6 +1,6 @@
 using System;
 
-namespace CDEApp.Models
+namespace CDEApp.ViewModels
 {
     public class ErrorViewModel
     {
