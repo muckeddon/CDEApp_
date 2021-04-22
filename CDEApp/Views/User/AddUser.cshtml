@@ -1,0 +1,18 @@
+﻿@model CDEApp.ViewModels.AddUserViewModel
+
+<div>
+    <h4>Добавление пользователя в проект</h4>
+    <form asp-controller="User" asp-action="AddUser" enctype="multipart/form-data" method="post">
+        <div>
+            <input asp-for="ProjectId" type="text" value="@Model.ProjectId" readonly hidden />
+        </div>
+        <div>
+            <label asp-for="Email"></label><br />
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <button type="submit">Добавить</button>
+        </div>
+    </form>
+</div>
