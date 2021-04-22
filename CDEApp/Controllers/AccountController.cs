@@ -1,5 +1,6 @@
 ﻿using CDEApp.Models;
 using CDEApp.ViewModels;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -74,6 +75,10 @@ namespace CDEApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(model.ExternalLogins is null) //checking ExternalLogins in model for null
+                {
+                    model.ExternalLogins = new List<AuthenticationScheme>();
+                }
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false); //sign in by information from model
                 if (result.Succeeded)
                 {
