@@ -1,0 +1,26 @@
+﻿@model CDEApp.ViewModels.AddDocumentViewModel
+<div>
+    <h4>Single File upload</h4>
+    <form asp-controller="Document" asp-action="Create" enctype="multipart/form-data" method="post">
+        <div>
+            <input asp-for="projectId" type="text" value="@Model.projectId" size="1" width="1" height="1" readonly hidden />
+        </div>
+        <div>
+            <label asp-for="Name"></label><br />
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="Document"></label><br />
+            <input type="file" name="Document" />
+        </div>
+        <div>
+            <p>Комментарий к документу:</p>
+            <label asp-for="Comment"></label><br />
+            <textarea asp-for="Comment"></textarea>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
