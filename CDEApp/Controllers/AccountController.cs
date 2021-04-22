@@ -174,6 +174,15 @@ namespace CDEApp.Controllers
         }
 
         #endregion
+        #region Redirect to create method of project controller
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateProject()
+        {
+            return RedirectToAction("Create", "Project");
+        }
+        #endregion
         #endregion
     }
 }
