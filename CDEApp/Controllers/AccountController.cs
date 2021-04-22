@@ -57,6 +57,35 @@ namespace CDEApp.Controllers
         }
         #endregion
 
+        #region Login
+
+        [HttpGet]
+        public async Task<IActionResult> Login(string returnUrl = null)
+        {
+            return View(new LoginViewModel { ReturnUrl = returnUrl, ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList() });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        //Login User
+        public async Task<IActionResult> Login(LoginViewModel model) //Get view model with login information
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false); //sign in by information from model
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home"); //redirection to home controller
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Неверный логин/пароль");
+                }
+            }
+            return View(model);
+        }
+        #endregion
         #endregion
     }
 }
