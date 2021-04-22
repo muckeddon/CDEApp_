@@ -1,6 +1,8 @@
+using CDEApp.Models;
 using CDEApp.Models.DataAccessLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +26,9 @@ namespace CDEApp
 
             services.AddDbContext<ApplicationContext>(options =>    //set ApplicationContext class as dbcontext class
                 options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddControllersWithViews();
         }
