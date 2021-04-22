@@ -1,8 +1,12 @@
-﻿using CDEApp.Models.DataAccessLayer;
+﻿using CDEApp.Models;
+using CDEApp.Models.DataAccessLayer;
 using CDEApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace CDEApp.Controllers
 {
@@ -22,7 +26,15 @@ namespace CDEApp.Controllers
         #region Index
         public IActionResult Index()
         {
-            return View();
+            List<Project> projects = new List<Project>();
+            foreach (var u in _context.Users.Include(u => u.Projects).ToList()) //get projects from DB by current user name
+            {
+                if (u.UserName == HttpContext.User.Identity.Name)
+                {
+                    projects = u.Projects;
+                }
+            }
+            return View(projects);
         }
         #endregion
         public IActionResult Privacy()
