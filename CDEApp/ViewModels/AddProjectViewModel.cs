@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CDEApp.Models;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace CDEApp.ViewModels
 {
-    public class AddProjectViewModel
+    public class AddProjectViewModel : IAddDoc
     {
         #region Properties
 
