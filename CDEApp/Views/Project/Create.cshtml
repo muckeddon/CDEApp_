@@ -1,0 +1,29 @@
+﻿@model CDEApp.ViewModels.AddProjectViewModel
+
+<h2>Создание проекта</h2>
+<div>
+    <h4>Single File upload</h4>
+    <form asp-controller="Project" asp-action="Create" enctype="multipart/form-data" method="post">
+        <div>
+            <label asp-for="Name"></label><br />
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="DocumentName"></label><br />
+            <input asp-for="DocumentName" />
+            <span asp-validation-for="DocumentName"></span>
+        </div>
+        <div>
+            <label asp-for="Document"></label><br />
+            <input type="file" name="Document" />
+        </div>
+        <div>
+            <label asp-for="Comment"></label><br />
+            <textarea class="col-xl-10" asp-for="Comment"></textarea>
+        </div>
+        <div>
+            <button type="submit">Создать</button>
+        </div>
+    </form>
+</div>
