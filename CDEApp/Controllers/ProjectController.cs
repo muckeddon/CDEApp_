@@ -69,6 +69,17 @@ namespace CDEApp.Controllers
             return RedirectToAction("Index", "Home");
         }
         #endregion
+        #region ProjectMenu
+        public IActionResult ProjectMenu(int projectId)
+        {
+            var documents = _context.Documents.Include(d => d.Comments).Where(p => p.ProjectId == projectId).ToList(); //get List of documents in current project
+            string admin = _context.Projects.Include(d => d.Documents).Where(p => p.Id == projectId).FirstOrDefault().Admin; //get admin user name of current project
+            string currentUser = HttpContext.User.Identity.Name; //get current user of project
+            bool isProjectClose = _context.Projects.Where(p => p.Id == projectId).Select(s => s.IsClose).FirstOrDefault();
+
+            return View(new AddCommentViewModel { IsProjectClose = isProjectClose, Documents = documents, Admin = admin, CurrentUser = currentUser });
+        }
+        #endregion
         #endregion
     }
 }
