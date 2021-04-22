@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CDEApp.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CDEApp.ViewModels
