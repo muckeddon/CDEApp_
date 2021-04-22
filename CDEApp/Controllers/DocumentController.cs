@@ -61,6 +61,23 @@ namespace CDEApp.Controllers
             return RedirectToAction("Index", "Home");
         }
         #endregion
+        #region Download
+        [HttpGet]
+        public IActionResult Download(int documentId, string documentFormat, string documentName)
+        {
+            byte[] subject = new byte[1];
+            foreach (var a in _context.Set<Document>()) //Get byte array from db
+            {
+                if (a.Id == documentId)
+                    subject = a.Subject;
+            }
+
+            return new FileContentResult(subject, "image/png") //Return file to user
+            {
+                FileDownloadName = $"{documentName}{documentFormat}"
+            };
+        }
+        #endregion
         #endregion
     }
 }
