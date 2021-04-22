@@ -3,25 +3,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CDEApp.Models.ViewModels
 {
-    public class AddProjectViewModel
+    public class AddDocumentViewModel
     {
         #region Properties
 
         [Required]
-        [Display(Name = "Название проекта")]
-        public string Name { get; set; } //Name of project
-
-        [Required]
         [Display(Name = "Название документа")]
-        public string DocumentName { get; set; } //Name of document
+        public string Name { get; set; }
 
         [Required]
         [Display(Name = "Загрузить файл")]
         public IFormFile Document { get; set; }
 
         [Required]
-        [Display(Name = "Комментарий")]
         public string Comment { get; set; }
+
+        [Required]
+        public int projectId { get; set; } //Document will insert in project by this Id
         #endregion
     }
 }
