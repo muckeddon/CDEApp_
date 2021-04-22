@@ -30,6 +30,13 @@ namespace CDEApp
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
 
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "55034759007-f7mposva9p06cusfutu4po2hmbccjot1.apps.googleusercontent.com";
+                    options.ClientSecret = "9Oiz_gsStLPTx639VhXhy43m";
+                });
+
             services.AddControllersWithViews();
         }
 
