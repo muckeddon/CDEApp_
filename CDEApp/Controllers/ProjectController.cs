@@ -80,6 +80,15 @@ namespace CDEApp.Controllers
             return View(new AddCommentViewModel { IsProjectClose = isProjectClose, Documents = documents, Admin = admin, CurrentUser = currentUser });
         }
         #endregion
+        #region CloseProject
+        public IActionResult CloseProject(int projectId)
+        {
+            var project = _context.Projects.Where(p => p.Id == projectId).FirstOrDefault();
+            project.IsClose = true;
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
         #endregion
     }
 }
