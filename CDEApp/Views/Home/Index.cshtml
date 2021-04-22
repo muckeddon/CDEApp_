@@ -1,10 +1,46 @@
-﻿@{
+﻿@model List<Project>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 @if (User.Identity.IsAuthenticated)
 {
-
+    <h5>Имя пользователя:</h5>
+    <p>@User.Identity.Name</p>
+    <hr />
+    @if (Model.Count() > 0)
+    {
+        <p>Ваши Проекты:</p>
+        <hr />
+        <table>
+            <tr><td>Название проекта</td><td>Админ проекта</td></tr>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>@Model.ToArray()[i].Name</td>
+                    <td>@Model.ToArray()[i].Admin</td>
+                    <td>
+                        @Html.ActionLink("Страница проекта", "ProjectMenu", "Project", new { projectId = Model.ToArray()[i].Id })
+                    </td>
+                </tr>
+            }
+        </table>
+        <hr />
+    }
+    <table>
+        <tr>
+            <td>
+                <form method="post" asp-controller="Account" asp-action="CreateProject">
+                    <input type="submit" value="Создать проект" />
+                </form>
+            </td>
+            <td>
+                <form method="post" asp-controller="Account" asp-action="Logout">
+                    <input type="submit" value="Выход" />
+                </form>
+            </td>
+        </tr>
+    </table>
 }
 else
 {
