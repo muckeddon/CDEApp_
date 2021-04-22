@@ -1,0 +1,81 @@
+﻿@model CDEApp.ViewModels.AddCommentViewModel
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Документы:</p>
+    <table class="table">
+        <tr><td>Название</td><td>Размер[байт]</td><td>Комментарии</td></tr>
+        @for (int i = 0; i < Model.Documents.Count; i++)
+        {
+            <tr>
+                <td>@Model.Documents.ToArray()[i].Name</td>
+                <td>@Model.Documents.ToArray()[i].Subject.Length</td>
+                <td>
+                    @foreach (var c in Model.Documents.ToArray()[i].Comments)
+                    {
+                        <p>@c.Text</p>;
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Cкачать документ", "Download", "Document", new
+                    {
+                       documentId = Model.Documents.ToArray()[i].Id,
+                       documentFormat = Model.Documents.ToArray()[i].Format,
+                       documentName = Model.Documents.ToArray()[i].Name
+                    })
+                </td>
+            </tr>
+            @if (Model.IsProjectClose == false)
+            {
+                <tr>
+                    <td>
+                        <form asp-controller="Comment" asp-action="AddComment" enctype="multipart/form-data" method="post">
+                            <div>
+                                <input asp-for="@Model.DocumentId" type="text" value="@Model.Documents.ToArray()[i].Id" readonly hidden />
+                            </div>
+                            <div>
+                                <label asp-for="@Model.CommentText"></label><br />
+                                <textarea asp-for="@Model.CommentText"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    @if (Model.IsProjectClose == false)
+    {
+        <p>
+            @Html.ActionLink("Добавить документ", "Create", "Document", new
+            {
+                projectId = Model.Documents.FirstOrDefault().ProjectId,
+            })
+        </p>
+        <p>
+            @if (Model.Admin == Model.CurrentUser)
+            {
+                @Html.ActionLink("Добавить пользователя в проект", "AddUser", "User", new
+                {
+                    projectId = Model.Documents.FirstOrDefault().ProjectId,
+                })
+            }
+        </p>
+        <p>
+            @if (Model.Admin == Model.CurrentUser)
+            {
+                @Html.ActionLink("Закрыть проект", "CloseProject", "Project", new
+                {
+                    projectId = Model.Documents.FirstOrDefault().ProjectId,
+                })
+            }
+        </p>
+    }
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login">Вход</a>
+    <a asp-controller="Account" asp-action="Register">Регистрация</a>
+}
